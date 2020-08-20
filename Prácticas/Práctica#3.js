@@ -48,17 +48,17 @@ class Post{
     get user(){ return this._user }
 }
 
-class Usuario{
-    constructor(_nYAp, _nickname, _fechaNac){
-        this._nYAp = _nYAp
+class User{
+    constructor(_nYAp, _nickname, _birthDate){
+        this._name = _nYAp
         this._nickname = _nickname
-        this._fechaNac = _fechaNac
+        this._birthDate = _birthDate
         this._posts = []
     }
 
-    get nyAp(){ return this._nYAp }
+    get name(){ return this._name }
     get nickname(){ return this._nickname } 
-    get fechaNac(){ return this._fechaNac }
+    get birthDate(){ return this._birthDate }
     get posts(){ return this._posts }
 
     post(aContent){
@@ -120,18 +120,18 @@ class Post{
 
 }
 
-class Usuario{
-    constructor(_nYAp, _nickname, _fechaNac){
-        this._nYAp = _nYAp
+class User{
+    constructor(_name, _nickname, _birthDate){
+        this._name = _name
         this._nickname = _nickname
-        this._fechaNac = _fechaNac
+        this._birthDate = _birthDate
         this._posts = []
         this._friends = []
     }
 
-    get nyAp(){ return this._nYAp }
+    get name(){ return this._name }
     get nickname(){ return this._nickname }
-    get fechaNac(){ return this._fechaNac }
+    get birthDate(){ return this._birthDate }
     get posts(){ return this._posts }
     get friends(){ return this._friends } 
 
@@ -288,18 +288,18 @@ class Post extends Message{
 }
 
 
-class Usuario{
-    constructor(_nYAp, _nickname, _fechaNac){
-        this._nYAp = _nYAp
+class User{
+    constructor(_name, _nickname, _birthDate){
+        this._name = _name
         this._nickname = _nickname
-        this._fechaNac = _fechaNac
+        this._birthDate = _birthDate
         this._posts = []
         this._friends = []
     }
 
-    get nyAp(){ return this._nYAp }
+    get name(){ return this._name }
     get nickname(){ return this._nickname }
-    get fechaNac(){ return this._fechaNac }
+    get birthDate(){ return this._birthDate }
     get posts(){ return this._posts }
     get friends(){ return this._friends } 
 
