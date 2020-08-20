@@ -234,6 +234,10 @@ class Message{
     get user(){ return this._user }
 
     printForUser(aUser){
+        console.log(`${aUser.nickname} ${this.middle()} en el día: ${this._date.toString()}`)
+    }
+
+    middle(){
         throw new MethodNotImplementError()
     }
 
@@ -245,22 +249,22 @@ class Message{
 class Comment extends Message{
     constructor(aUser, aPost, aContent){
         super(aContent, aUser)
-        if(this.isValidate(aContent)){
+        if(!this.isValidate(aContent)){
             throw  new CommentGreaterThan100Error()
         }
         this._post = aPost
     }
 
     isValidate(aContent){
-        return aContent.length >=  100
+        return aContent.length <=  100
     }
 
     get post(){ return this._post }
-    
-    printForUser(aUser){
-        console.log(aUser.nickname + " comentaste el post de tu amigo,  ' " + this._post.content + " ' diciendo: '" + this._content+ " ' el día " + this._date.toString())
-    }
 
+    middle(){
+        return ` comentaste el post " ${this._post.content} " de tu amigo ${this._post.user.nickname}, diciendo: " ${this._content} " ` 
+    }
+    
     messageDoneBy(aUserWhoMadeIt){
         console.log("Ey, " + this._post.user.nickname+", " + aUserWhoMadeIt.nickname + " comentó tu post: ' "+  this._post.content + " '" + " diciendo: '" + this._content + " '") 
     }
@@ -278,8 +282,8 @@ class Post extends Message{
         this._comments.push(aComment)       
     }
 
-    printForUser(aUser){
-        console.log(aUser._nickname +  " dijiste: ' " + this._content+" '" +  " en el día " + this._date.toString())
+    middle(){
+        return `dijiste: " ${this._content} "` 
     }
 
     messageDoneBy(aUserWhoMadeIt){
@@ -349,10 +353,10 @@ class User{
     }
 }
 
-let pepe = new Usuario("Pepe Argento", "IlPepe", new Date())
-let dardo = new Usuario("Dardo Fusceneco", "MrMusculo", new Date())
-let mariaelena = new Usuario("Maria Elena Fusceneco", "LaNena", new Date())
-let moni = new Usuario("Moni Argento", "Moni", new Date())
+let pepe = new User("Pepe Argento", "IlPepe", new Date())
+let dardo = new User("Dardo Fusceneco", "MrMusculo", new Date())
+let mariaelena = new User("Maria Elena Fusceneco", "LaNena", new Date())
+let moni = new User("Moni Argento", "Moni", new Date())
 
 pepe.sendFriendlyRequest(dardo)
 pepe.sendFriendlyRequest(moni)
@@ -361,3 +365,4 @@ mariaelena.sendFriendlyRequest(moni)
 
 pepe.post("Ess unaaaa nenaaaaaaaa!!!!!!!!!!!!!!!!")
 moni.comment(pepe.posts[0], "Ya vamos a hablar en casa")
+mariaelena.comment(pepe.posts[0],"Deme el comentario mas machirulo que tenga. No, no tan machirulo")
