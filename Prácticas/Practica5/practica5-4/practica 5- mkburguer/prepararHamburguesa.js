@@ -53,6 +53,8 @@ class Restaurante {
         // Retorna una promesa de una carne cocida
         return obtenerCarne()
         .then(
+            // - Punto 1 -
+            //carneCruda => Promise.reject(new Error('Algo malo paso'))
             carneCruda => cocinarCarneLadoA(carneCruda)
         ).then(
             carneSemicocida => cocinarCarneLadoB(carneSemicocida)
@@ -80,4 +82,8 @@ const restaurante = new Restaurante();
 restaurante.prepararHamburguesa()
     .then((hamburguesa) => {
         console.log("Gracias! esta es mi hamburguesa: ", hamburguesa);
+    })
+    .catch((error) => {
+        // - Punto 1 - 
+        console.log("La hamburguesa no pudo ser hecha: ", error.message);
     });
