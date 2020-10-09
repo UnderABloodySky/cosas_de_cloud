@@ -84,4 +84,8 @@ module.exports = {
     cocinarCarneLadoB: function(input) {
         return new Action("Cocinar carne del lado B", "Carne cocida", "Carne semicocida").doIt(input);
     },
+
+    ponerMayonesa : function(input) {
+        return new Action("Poner Mayonesa", "Carne cocida con mayonesa", "Carne cocida").doIt(input);
+    }
 }
