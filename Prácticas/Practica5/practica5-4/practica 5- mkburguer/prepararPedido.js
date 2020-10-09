@@ -88,20 +88,26 @@ class Empleado {
         );
     }
 
-    prepararPapas() {
-        //Retorna una promesa de papas
-        return obtenerPapas().then(
+    prepararPapas(papasConSal = false) {
+        return obtenerPapas()
+        .then(
             papas => freirPapas(papas)
         ).then(
             papasFritas => empaquetarPapas(papasFritas)
-        );
+        ).then(papasEmpaquetadas => { 
+            if (papasConSal) {
+                papasEmpaquetadas =  salarPapas(papasEmpaquetadas)
+            }
+            return papasEmpaquetadas
+        });
     }
 
     prepararBebida() {
-        //Retorna una promesa de Bebida
+        // Retorna una promesa de Bebida
         return obtenerVaso().then(
             vasoServido => prepararBebida(vasoServido)
-        );
+        ).catch(
+            error => { return "Botella de agua" });
     }
 }
 
@@ -110,20 +116,18 @@ class Restaurante {
         this.empleados = [new Empleado(), new Empleado(), new Empleado()]
     }
 
-    armarPedido() {
+    armarPedido(papasConSal) {
         const encargadoPapas = this.empleados[0];
         const encargadoBebidas = this.empleados[1];
         const encargadoHamburguesas = this.empleados[2];
         console.log("Por favor espere mientras su pedido esta siendo preparado ...");
-        return Promise.all([encargadoPapas.prepararPapas(), 
+        return Promise.all([encargadoPapas.prepararPapas(papasConSal), 
                            encargadoHamburguesas.prepararHamburguesa(), 
                            encargadoBebidas.prepararBebida()])
                            .then((pedido) => (
-                                    {
-                                        papas: pedido[0],
+                                    {   papas: pedido[0],
                                         hamburguesa: pedido[1],
-                                        bebida: pedido[2]
-                                    })
+                                        bebida: pedido[2] })
         );
     }
 }
@@ -133,6 +137,7 @@ class Restaurante {
 const restaurante = new Restaurante();
 
 // Cliente 1 solicita un Menu
+//restaurante.armarPedido(true)
 restaurante.armarPedido()
     .then((pedido) => {
         console.log("[CLIENTE 1]-----------");
