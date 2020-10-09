@@ -42,7 +42,7 @@ class Action {
 module.exports = {
     // Bebida
     obtenerVaso: function() {
-        return new Action("Obtener vaso", "Vaso").doIt();
+        return new Action("Obtener vaso", "Vaso servido").doIt();
     },
 
     prepararBebida: function(input) {

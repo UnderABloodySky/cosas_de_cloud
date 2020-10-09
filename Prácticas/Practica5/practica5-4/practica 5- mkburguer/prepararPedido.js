@@ -89,11 +89,19 @@ class Empleado {
     }
 
     prepararPapas() {
-        // TODO: a completar por el alumno
+        //Retorna una promesa de papas
+        return obtenerPapas().then(
+            papas => freirPapas(papas)
+        ).then(
+            papasFritas => empaquetarPapas(papasFritas)
+        );
     }
 
     prepararBebida() {
-        // TODO: a completar por el alumno
+        //Retorna una promesa de Bebida
+        return obtenerVaso().then(
+            vasoServido => prepararBebida(vasoServido)
+        );
     }
 }
 
@@ -103,7 +111,20 @@ class Restaurante {
     }
 
     armarPedido() {
-        // TODO: a completar por el alumno
+        const encargadoPapas = this.empleados[0];
+        const encargadoBebidas = this.empleados[1];
+        const encargadoHamburguesas = this.empleados[2];
+        console.log("Por favor espere mientras su pedido esta siendo preparado ...");
+        return Promise.all([encargadoPapas.prepararPapas(), 
+                           encargadoHamburguesas.prepararHamburguesa(), 
+                           encargadoBebidas.prepararBebida()])
+                           .then((pedido) => (
+                                    {
+                                        papas: pedido[0],
+                                        hamburguesa: pedido[1],
+                                        bebida: pedido[2]
+                                    })
+        );
     }
 }
 
