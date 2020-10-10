@@ -47,7 +47,7 @@ readFilePromise('students.json')
                         throw e;
                     }
                     writeFilePromise("promedios.json", JSON.stringify(promedios(parsedData))) })
-                        .then(data => console.log("Guardado"))
+                        .then( _ => console.log("Guardado"))
                         .catch(
                                 error => {
                                     console.log('No se pudo leer!');

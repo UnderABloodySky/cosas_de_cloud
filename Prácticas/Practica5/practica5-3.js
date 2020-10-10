@@ -33,7 +33,6 @@ class Cliente{
     get ticket() { return this._ticket };
 
     quejarse(){
-        console.log("TURNO RESTAURANT CLIENTE " + this.restaurant.turno);
         if (!this.restaurant.estaListaLaOrden(this._ticket)){
             console.log(`[ ${this.nombre} | nro° ${this.ticket} ] : "¿Qué? ¿Mi plata no vale? Estoy esperando hace ${this._seconds++} ${this._seconds == 2? "segundo" : "segundos" }... !!"`);
             this.esperar();
@@ -62,7 +61,7 @@ class Restaurante{
     atender(unTurno){
         
         const n = parseInt(unTurno)
-        if(isNaN(n) ){//|| !this._clientes.some(cliente => cliente.ticket === n)){
+        if(isNaN(n) || !this._clientes.some(cliente => cliente.ticket === n)){
             console.log("");
             console.log(`  =========================== NÚMERO DE TICKET INVÁLIDO: ${unTurno}  ===========================  `);
             console.log("");
@@ -113,6 +112,6 @@ class Restaurante{
 }
 
 const resto = new Restaurante();
-const nombres = ["Elvis"]//, "Pepe", "Moe", "Larry", "Curry"];
+const nombres = ["Elvis", "Pepe", "Moe", "Larry", "Curry"];
 nombres.forEach(nombre => resto.agregarCliente(nombre));
 resto.empezarAAtender();
